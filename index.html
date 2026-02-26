@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dorky Robot</title>
   <link rel="stylesheet" href="style.css">
-
 </head>
 <body>
   <canvas id="shader-bg" class="shader-bg" aria-hidden="true"></canvas>
@@ -47,7 +46,7 @@
           <div class="card-header">
             <h3>abot</h3>
             <span class="lang js">JS</span>
-              <span class="lang rust">Rust</span>
+            <span class="lang rust">Rust</span>
           </div>
           <p>AI-native spatial interface.</p>
         </a>
@@ -173,7 +172,8 @@
     var uRes = gl.getUniformLocation(prog, 'u_resolution');
 
     var rafId;
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var prefersReduced = mql.matches;
 
     function frame(ts) {
       gl.uniform1f(uTime, prefersReduced ? 0.0 : ts * 0.001);
@@ -182,6 +182,15 @@
       if (!prefersReduced) rafId = requestAnimationFrame(frame);
     }
     rafId = requestAnimationFrame(frame);
+
+    mql.addEventListener('change', function(e) {
+      prefersReduced = e.matches;
+      if (prefersReduced) {
+        cancelAnimationFrame(rafId);
+      } else {
+        rafId = requestAnimationFrame(frame);
+      }
+    });
 
     document.addEventListener('visibilitychange', function() {
       if (document.hidden) {
