@@ -166,6 +166,11 @@ body {
   letter-spacing: 0.05em;
 }
 
+.badge-group {
+  display: flex;
+  gap: 0.35rem;
+}
+
 .lang.rust {
   background: rgba(222, 165, 132, 0.15);
   color: var(--rust);
