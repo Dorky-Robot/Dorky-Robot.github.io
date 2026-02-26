@@ -104,6 +104,27 @@ body {
   transform: translateY(-2px);
 }
 
+/* Card with logo variant */
+.card-with-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 6px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.card-with-logo .card-body {
+  flex: 1;
+  min-width: 0;
+}
+
 .card-header {
   display: flex;
   align-items: center;
