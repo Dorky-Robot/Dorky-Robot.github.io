@@ -61,4 +61,4 @@ Severity levels:
 - **LOW**: minor inefficiency
 - **INFO**: optimization suggestion
 
-End with an overall verdict: **APPROVE**, **APPROVE WITH NOTES**, or **REQUEST CHANGES**.
+End with an overall verdict: **APPROVE**, **APPROVE_WITH_NOTES**, or **REQUEST_CHANGES**.

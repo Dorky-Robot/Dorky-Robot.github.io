@@ -71,4 +71,4 @@ For each category, state findings or "No findings."
 End with:
 - List of any broken links or missing assets
 - List of any accessibility barriers
-- Overall verdict: **APPROVE**, **APPROVE WITH NOTES**, or **REQUEST CHANGES**
+- Overall verdict: **APPROVE**, **APPROVE_WITH_NOTES**, or **REQUEST_CHANGES**

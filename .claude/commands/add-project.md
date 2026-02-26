@@ -7,7 +7,7 @@ $ARGUMENTS should be the GitHub repo name under Dorky-Robot (e.g., "my-new-proje
 If $ARGUMENTS only contains a repo name, fetch details from GitHub:
 
 ```bash
-gh repo view Dorky-Robot/$ARGUMENTS --json name,description,primaryLanguage
+gh repo view "Dorky-Robot/$ARGUMENTS" --json name,description,primaryLanguage
 ```
 
 Determine:
@@ -38,7 +38,7 @@ If the language doesn't have a CSS class yet, add one following the existing pat
 
 ## Step 5: Add the card
 
-Insert the new card HTML inside the `.grid` div in `index.html`, following the exact structure of existing cards:
+Insert the new card HTML inside the `.grid` div in `index.html`, following the exact structure of existing cards. HTML-escape all values from GitHub (repo name, description, language) before inserting — replace `&` with `&amp;`, `<` with `&lt;`, `>` with `&gt;`, and `"` with `&quot;`. Logo images must be in WebP format and under 300KB.
 
 **Standard card:**
 ```html

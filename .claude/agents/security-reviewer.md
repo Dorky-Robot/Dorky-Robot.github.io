@@ -78,4 +78,4 @@ End your review with a summary table:
 | LOW | N |
 | INFO | N |
 
-And an overall verdict: **APPROVE**, **APPROVE WITH NOTES**, or **REQUEST CHANGES**.
+And an overall verdict: **APPROVE**, **APPROVE_WITH_NOTES**, or **REQUEST_CHANGES**.
