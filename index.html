@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dorky Robot</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css">
+
 </head>
 <body>
-  <canvas id="shader-bg"></canvas>
+  <canvas id="shader-bg" class="shader-bg" aria-hidden="true"></canvas>
   <header class="hero">
     <div class="hero-inner">
       <h1>Dorky Robot <span class="blink">_</span></h1>
@@ -46,7 +46,8 @@
         <a href="https://github.com/Dorky-Robot/abot" class="card">
           <div class="card-header">
             <h3>abot</h3>
-            <span class="lang js">JS <i class="ph-bold ph-arrow-right"></i> Rust</span>
+            <span class="lang js">JS</span>
+              <span class="lang rust">Rust</span>
           </div>
           <p>AI-native spatial interface.</p>
         </a>
@@ -171,13 +172,24 @@
     var uTime = gl.getUniformLocation(prog, 'u_time');
     var uRes = gl.getUniformLocation(prog, 'u_resolution');
 
+    var rafId;
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     function frame(ts) {
-      gl.uniform1f(uTime, ts * 0.001);
+      gl.uniform1f(uTime, prefersReduced ? 0.0 : ts * 0.001);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
-      requestAnimationFrame(frame);
+      if (!prefersReduced) rafId = requestAnimationFrame(frame);
     }
-    requestAnimationFrame(frame);
+    rafId = requestAnimationFrame(frame);
+
+    document.addEventListener('visibilitychange', function() {
+      if (document.hidden) {
+        cancelAnimationFrame(rafId);
+      } else if (!prefersReduced) {
+        rafId = requestAnimationFrame(frame);
+      }
+    });
   })();
   </script>
 </body>

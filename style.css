@@ -18,9 +18,10 @@
   --js: #f1e05a;
   --ts: #3178c6;
   --elixir: #6e4a7e;
+  --surface-rgb: 22, 27, 34;
 }
 
-#shader-bg {
+.shader-bg {
   position: fixed;
   top: 0;
   left: 0;
@@ -100,7 +101,7 @@ body {
 /* Cards */
 .card {
   display: block;
-  background: rgba(22, 27, 34, 0.65);
+  background: rgba(var(--surface-rgb), 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border);
