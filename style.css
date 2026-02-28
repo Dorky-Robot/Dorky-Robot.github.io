@@ -78,17 +78,7 @@ body {
   color: var(--text-muted);
 }
 
-.maturity-explainer {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
 
-.maturity-explainer strong {
-  color: var(--text);
-  font-weight: 600;
-}
 
 /* Projects */
 .projects {
