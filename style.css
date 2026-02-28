@@ -78,6 +78,18 @@ body {
   color: var(--text-muted);
 }
 
+.maturity-explainer {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.maturity-explainer strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 /* Projects */
 .projects {
   max-width: 960px;
@@ -110,12 +122,12 @@ body {
   padding: 1.25rem;
   text-decoration: none;
   color: var(--text);
-  transition: border-color 0.15s, transform 0.15s;
+  transition: background 0.15s, border-color 0.15s;
 }
 
 .card:hover {
-  border-color: var(--accent);
-  transform: translateY(-2px);
+  background: rgba(var(--surface-rgb), 0.85);
+  border-color: var(--border);
 }
 
 /* Card with logo variant */
@@ -191,56 +203,19 @@ body {
   color: var(--elixir);
 }
 
-/* Maturity indicator — inline with description */
+/* Maturity indicator — inline with project title */
 .maturity {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-left: 0.15rem;
-  font-size: 0.75rem;
-  font-style: italic;
+  font-size: 0.65rem;
   font-weight: 400;
+  font-style: italic;
   letter-spacing: 0.02em;
-  cursor: default;
-}
-
-.maturity::before {
-  content: "\b7";
-  font-style: normal;
+  margin-left: 0.4rem;
+  vertical-align: middle;
 }
 
 .maturity.served { color: #3fb950; }
 .maturity.cooking { color: #e3a338; }
 .maturity.raw { color: var(--text-muted); }
-
-/* CSS tooltip */
-.maturity::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%) scale(0.95);
-  padding: 0.3rem 0.6rem;
-  font-size: 0.75rem;
-  font-style: normal;
-  font-weight: 500;
-  white-space: nowrap;
-  color: var(--text);
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.15s, transform 0.15s;
-  z-index: 10;
-}
-
-.maturity:hover::after {
-  opacity: 1;
-  transform: translateX(-50%) scale(1);
-}
 
 /* Footer */
 footer {
