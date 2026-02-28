@@ -231,3 +231,45 @@ footer a:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Maturity badges */
+.maturity {
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: 12px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.maturity.served {
+  background: rgba(63, 185, 80, 0.15);
+  color: #3fb950;
+}
+
+.maturity.cooking {
+  background: rgba(227, 159, 56, 0.15);
+  color: #e3a338;
+}
+
+.maturity.raw {
+  background: rgba(139, 148, 158, 0.12);
+  color: var(--text-muted);
+}
+
+/* Legend */
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
