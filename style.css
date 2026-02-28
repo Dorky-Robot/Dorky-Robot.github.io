@@ -191,6 +191,80 @@ body {
   color: var(--elixir);
 }
 
+/* Maturity badges — distinct from language badges */
+.maturity {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  cursor: default;
+}
+
+.maturity::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.maturity.served {
+  color: #3fb950;
+}
+
+.maturity.served::before {
+  background: #3fb950;
+}
+
+.maturity.cooking {
+  color: #e3a338;
+}
+
+.maturity.cooking::before {
+  background: #e3a338;
+}
+
+.maturity.raw {
+  color: var(--text-muted);
+}
+
+.maturity.raw::before {
+  background: var(--text-muted);
+}
+
+/* CSS tooltip */
+.maturity::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.95);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+  z-index: 10;
+}
+
+.maturity:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
 /* Footer */
 footer {
   margin-top: auto;
@@ -230,46 +304,4 @@ footer a:hover {
   .grid {
     grid-template-columns: 1fr;
   }
-}
-
-/* Maturity badges */
-.maturity {
-  font-size: 0.65rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
-  letter-spacing: 0.03em;
-  white-space: nowrap;
-}
-
-.maturity.served {
-  background: rgba(63, 185, 80, 0.15);
-  color: #3fb950;
-}
-
-.maturity.cooking {
-  background: rgba(227, 159, 56, 0.15);
-  color: #e3a338;
-}
-
-.maturity.raw {
-  background: rgba(139, 148, 158, 0.12);
-  color: var(--text-muted);
-}
-
-/* Legend */
-.legend {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.25rem;
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.legend-item {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
 }
