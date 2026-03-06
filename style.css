@@ -18,6 +18,7 @@
   --js: #f1e05a;
   --ts: #3178c6;
   --elixir: #6e4a7e;
+  --bash: #89e051;
   --surface-rgb: 22, 27, 34;
 }
 
@@ -191,6 +192,11 @@ body {
 .lang.elixir {
   background: rgba(110, 74, 126, 0.15);
   color: var(--elixir);
+}
+
+.lang.bash {
+  background: rgba(137, 224, 81, 0.15);
+  color: var(--bash);
 }
 
 /* Maturity indicator — inline with project title */
