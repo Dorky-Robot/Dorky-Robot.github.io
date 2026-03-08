@@ -105,12 +105,14 @@ body {
 /* Cards */
 .card {
   display: block;
+  position: relative;
   background: rgba(var(--surface-rgb), 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px); /* Safari < 18 */
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 1.25rem;
+  padding-bottom: 2.2rem;
   text-decoration: none;
   color: var(--text);
   transition: background 0.15s, border-color 0.15s;
@@ -145,7 +147,6 @@ body {
 .card-header {
   display: flex;
   align-items: baseline;
-  flex-wrap: wrap;
   gap: 0.4rem;
   margin-bottom: 0.5rem;
 }
@@ -153,7 +154,6 @@ body {
 .card h3 {
   font-size: 1.1rem;
   font-weight: 600;
-  margin-right: auto;
 }
 
 .card p {
@@ -180,6 +180,14 @@ body {
 .badge-group {
   display: flex;
   gap: 0.35rem;
+}
+
+/* Position lang badges at bottom-right of card */
+.card-header > .lang,
+.card-header > .badge-group {
+  position: absolute;
+  bottom: 0.65rem;
+  right: 0.9rem;
 }
 
 .lang.rust {
