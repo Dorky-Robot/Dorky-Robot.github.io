@@ -161,12 +161,18 @@ body {
 
 /* Language badges */
 .lang {
-  font-size: 0.7rem;
-  font-weight: 600;
-  padding: 0.15rem 0.5rem;
-  border-radius: 12px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  border: 1px solid transparent;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.card:hover .lang {
+  border-color: currentColor;
 }
 
 .badge-group {
@@ -175,43 +181,76 @@ body {
 }
 
 .lang.rust {
-  background: rgba(222, 165, 132, 0.15);
+  background: rgba(222, 165, 132, 0.1);
   color: var(--rust);
+  box-shadow: 0 0 0 0 rgba(222, 165, 132, 0);
+}
+.card:hover .lang.rust {
+  box-shadow: 0 0 8px rgba(222, 165, 132, 0.25);
 }
 
 .lang.js {
-  background: rgba(241, 224, 90, 0.15);
+  background: rgba(241, 224, 90, 0.1);
   color: var(--js);
+}
+.card:hover .lang.js {
+  box-shadow: 0 0 8px rgba(241, 224, 90, 0.2);
 }
 
 .lang.ts {
-  background: rgba(49, 120, 198, 0.15);
+  background: rgba(49, 120, 198, 0.12);
   color: var(--ts);
+}
+.card:hover .lang.ts {
+  box-shadow: 0 0 8px rgba(49, 120, 198, 0.3);
 }
 
 .lang.elixir {
-  background: rgba(110, 74, 126, 0.15);
+  background: rgba(110, 74, 126, 0.12);
   color: var(--elixir);
+}
+.card:hover .lang.elixir {
+  box-shadow: 0 0 8px rgba(110, 74, 126, 0.3);
 }
 
 .lang.bash {
-  background: rgba(137, 224, 81, 0.15);
+  background: rgba(137, 224, 81, 0.1);
   color: var(--bash);
 }
-
-/* Maturity indicator — inline with project title */
-.maturity {
-  font-size: 0.65rem;
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  margin-left: 0.4rem;
-  vertical-align: middle;
+.card:hover .lang.bash {
+  box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
 }
 
-.maturity.served { color: #3fb950; }
-.maturity.cooking { color: #e3a338; }
-.maturity.raw { color: var(--text-muted); }
+/* Maturity badges */
+.maturity {
+  font-size: 0.6rem;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0.04em;
+  margin-left: 0.5rem;
+  vertical-align: middle;
+  padding: 0.15rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+}
+
+.maturity.served {
+  color: #3fb950;
+  background: rgba(63, 185, 80, 0.08);
+  border-color: rgba(63, 185, 80, 0.2);
+}
+
+.maturity.cooking {
+  color: #e3a338;
+  background: rgba(227, 163, 56, 0.08);
+  border-color: rgba(227, 163, 56, 0.2);
+}
+
+.maturity.raw {
+  color: var(--text-muted);
+  background: rgba(139, 148, 158, 0.06);
+  border-color: rgba(139, 148, 158, 0.15);
+}
 
 /* Footer */
 footer {
