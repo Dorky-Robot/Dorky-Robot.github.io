@@ -144,14 +144,16 @@ body {
 
 .card-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.4rem;
   margin-bottom: 0.5rem;
 }
 
 .card h3 {
   font-size: 1.1rem;
   font-weight: 600;
+  margin-right: auto;
 }
 
 .card p {
@@ -221,36 +223,18 @@ body {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
 }
 
-/* Maturity badges */
+/* Maturity indicator — subtle text beside title */
 .maturity {
-  font-size: 0.6rem;
-  font-weight: 600;
-  font-style: normal;
-  letter-spacing: 0.04em;
-  margin-left: 0.5rem;
-  vertical-align: middle;
-  padding: 0.15rem 0.5rem;
-  border-radius: 6px;
-  border: 1px solid transparent;
+  font-size: 0.65rem;
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  vertical-align: baseline;
 }
 
-.maturity.served {
-  color: #3fb950;
-  background: rgba(63, 185, 80, 0.08);
-  border-color: rgba(63, 185, 80, 0.2);
-}
-
-.maturity.cooking {
-  color: #e3a338;
-  background: rgba(227, 163, 56, 0.08);
-  border-color: rgba(227, 163, 56, 0.2);
-}
-
-.maturity.raw {
-  color: var(--text-muted);
-  background: rgba(139, 148, 158, 0.06);
-  border-color: rgba(139, 148, 158, 0.15);
-}
+.maturity.served { color: #3fb950; }
+.maturity.cooking { color: #e3a338; }
+.maturity.raw { color: var(--text-muted); }
 
 /* Footer */
 footer {
