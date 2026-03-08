@@ -223,18 +223,38 @@ body {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
 }
 
-/* Maturity indicator — subtle text beside title */
+/* Maturity — hidden text, expressed as card bottom border */
 .maturity {
-  font-size: 0.65rem;
-  font-weight: 500;
-  font-style: italic;
-  letter-spacing: 0.02em;
-  vertical-align: baseline;
+  display: none;
 }
 
-.maturity.served { color: #3fb950; }
-.maturity.cooking { color: #e3a338; }
-.maturity.raw { color: var(--text-muted); }
+.card {
+  border-bottom: 2px solid transparent;
+}
+
+.card:has(.served) {
+  border-bottom-color: rgba(63, 185, 80, 0.5);
+}
+
+.card:has(.cooking) {
+  border-bottom-color: rgba(227, 163, 56, 0.5);
+}
+
+.card:has(.raw) {
+  border-bottom-color: rgba(139, 148, 158, 0.2);
+}
+
+.card:hover:has(.served) {
+  border-bottom-color: #3fb950;
+}
+
+.card:hover:has(.cooking) {
+  border-bottom-color: #e3a338;
+}
+
+.card:hover:has(.raw) {
+  border-bottom-color: rgba(139, 148, 158, 0.4);
+}
 
 /* Footer */
 footer {
