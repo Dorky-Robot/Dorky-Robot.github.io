@@ -264,31 +264,6 @@ body {
   border-bottom-color: rgba(139, 148, 158, 0.4);
 }
 
-/* Dork badge */
-.badge-link {
-  text-decoration: none;
-}
-
-.badge.dork {
-  display: inline-block;
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 0.25rem 0.7rem;
-  border-radius: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  background: rgba(88, 166, 255, 0.1);
-  color: var(--accent);
-  border: 1px solid transparent;
-  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s;
-}
-
-.badge.dork:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
-  background: rgba(88, 166, 255, 0.15);
-}
-
 /* Footer */
 footer {
   margin-top: auto;
