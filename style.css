@@ -231,6 +231,37 @@ body {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
 }
 
+/* Card title link */
+.card-title-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-title-link:hover {
+  color: var(--accent);
+}
+
+/* Social badges */
+.lang.social {
+  text-decoration: none;
+}
+
+.lang.twitter {
+  background: rgba(29, 161, 242, 0.1);
+  color: #1da1f2;
+}
+.card:hover .lang.twitter {
+  box-shadow: 0 0 8px rgba(29, 161, 242, 0.25);
+}
+
+.lang.linkedin {
+  background: rgba(10, 102, 194, 0.12);
+  color: #5b9bd5;
+}
+.card:hover .lang.linkedin {
+  box-shadow: 0 0 8px rgba(10, 102, 194, 0.3);
+}
+
 /* Maturity — hidden text, expressed as card bottom border */
 .maturity {
   display: none;
