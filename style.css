@@ -254,6 +254,7 @@ body {
 .lang.twitter {
   background: rgba(29, 161, 242, 0.1);
   color: #1da1f2;
+  border-color: currentColor;
 }
 .card:hover .lang.twitter {
   box-shadow: 0 0 8px rgba(29, 161, 242, 0.25);
@@ -262,6 +263,7 @@ body {
 .lang.linkedin {
   background: rgba(10, 102, 194, 0.12);
   color: #5b9bd5;
+  border-color: currentColor;
 }
 .card:hover .lang.linkedin {
   box-shadow: 0 0 8px rgba(10, 102, 194, 0.3);
