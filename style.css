@@ -231,6 +231,11 @@ body {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
 }
 
+/* Dorks section */
+.dorks {
+  padding-bottom: 5rem;
+}
+
 /* Card title link */
 .card-title-link {
   color: inherit;
