@@ -19,6 +19,7 @@
   --ts: #3178c6;
   --elixir: #6e4a7e;
   --bash: #89e051;
+  --go: #00add8;
   --surface-rgb: 22, 27, 34;
 }
 
@@ -229,6 +230,14 @@ body {
 }
 .card:hover .lang.bash {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
+}
+
+.lang.go {
+  background: rgba(0, 173, 216, 0.1);
+  color: var(--go);
+}
+.card:hover .lang.go {
+  box-shadow: 0 0 8px rgba(0, 173, 216, 0.25);
 }
 
 /* Dorks section */
