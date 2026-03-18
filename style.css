@@ -80,6 +80,23 @@ body {
   color: var(--text-muted);
 }
 
+.discord-link {
+  margin-top: 1rem;
+}
+
+.discord-link a {
+  color: #5865f2;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.discord-link a:hover {
+  color: #7289da;
+  text-decoration: underline;
+}
+
 
 
 /* Projects */
