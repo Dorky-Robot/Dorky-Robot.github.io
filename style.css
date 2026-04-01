@@ -16,10 +16,7 @@
   --accent-hover: #79b8ff;
   --rust: #dea584;
   --js: #f1e05a;
-  --ts: #3178c6;
-  --elixir: #6e4a7e;
   --bash: #89e051;
-  --go: #00add8;
   --surface-rgb: 22, 27, 34;
 }
 
@@ -233,36 +230,12 @@ body {
   box-shadow: 0 0 8px rgba(241, 224, 90, 0.2);
 }
 
-.lang.ts {
-  background: rgba(49, 120, 198, 0.12);
-  color: var(--ts);
-}
-.card:hover .lang.ts {
-  box-shadow: 0 0 8px rgba(49, 120, 198, 0.3);
-}
-
-.lang.elixir {
-  background: rgba(110, 74, 126, 0.12);
-  color: var(--elixir);
-}
-.card:hover .lang.elixir {
-  box-shadow: 0 0 8px rgba(110, 74, 126, 0.3);
-}
-
 .lang.bash {
   background: rgba(137, 224, 81, 0.1);
   color: var(--bash);
 }
 .card:hover .lang.bash {
   box-shadow: 0 0 8px rgba(137, 224, 81, 0.2);
-}
-
-.lang.go {
-  background: rgba(0, 173, 216, 0.1);
-  color: var(--go);
-}
-.card:hover .lang.go {
-  box-shadow: 0 0 8px rgba(0, 173, 216, 0.25);
 }
 
 /* Dorks section */
@@ -320,20 +293,12 @@ body {
   border-bottom-color: rgba(227, 163, 56, 0.5);
 }
 
-.card:has(.raw) {
-  border-bottom-color: rgba(139, 148, 158, 0.2);
-}
-
 .card:hover:has(.served) {
   border-bottom-color: #3fb950;
 }
 
 .card:hover:has(.cooking) {
   border-bottom-color: #e3a338;
-}
-
-.card:hover:has(.raw) {
-  border-bottom-color: rgba(139, 148, 158, 0.4);
 }
 
 /* Footer */
