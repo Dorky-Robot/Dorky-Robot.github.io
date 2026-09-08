@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blinking Contest · Dorky Robot Arcade</title>
+  <meta name="description" content="Stare down your webcam. The moment you blink, the clock stops. Post your time to the Top Blinkers board.">
+  <link rel="stylesheet" href="../../style.css">
+  <link rel="stylesheet" href="blinkers.css">
+  <!-- Versions are pinned: these five have to agree, and an unpinned "latest"
+       silently breaks the page the day any of them ships a major bump.
+       face-detection is not optional — the tfjs FaceMesh runtime uses it to
+       locate the face before fitting the mesh, and without it estimateFaces
+       just returns [] forever with no error. -->
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-core@4.22.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-converter@4.22.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs-backend-webgl@4.22.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-detection@1.0.3"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/face-landmarks-detection@1.0.6"></script>
+  <script src="config.js"></script>
+</head>
+<body class="arcade-body">
+  <canvas id="shader-bg" class="shader-bg" aria-hidden="true"></canvas>
+
+  <nav class="arcade-nav">
+    <a href="/play/">← Arcade</a>
+    <a href="/">Dorky Robot</a>
+  </nav>
+
+  <main class="cabinet">
+    <header class="cabinet-head">
+      <h1>👁️ Blinking Contest</h1>
+      <p class="cabinet-tagline">How long can you last</p>
+    </header>
+
+    <!-- Populated when the page is opened from a "challenge" link. -->
+    <div class="ghost-banner" id="ghostBanner" hidden>
+      <span id="ghostBannerText"></span>
+      <a href="/play/blinkers/" class="ghost-clear">drop challenge</a>
+    </div>
+
+    <p class="loading" id="loading">Loading face detection…</p>
+
+    <!-- The feed is never shown — only the two eye crops are. It keeps a real
+         layout size and is clipped by the wrapper rather than shrunk to 1px,
+         because a 1x1/hidden video can stop being composited and then supplies
+         no frames to drawImage or the detector. -->
+    <div class="camhide"><video id="video" autoplay playsinline muted></video></div>
+
+    <section class="stage" id="stage" hidden>
+      <div class="eyes">
+        <div class="eye" id="eyeLeft">
+          <canvas id="canvasLeft"></canvas>
+          <span class="eye-tag">LEFT</span>
+          <span class="eye-ear" id="earLeft">—</span>
+        </div>
+        <div class="eye" id="eyeRight">
+          <canvas id="canvasRight"></canvas>
+          <span class="eye-tag">RIGHT</span>
+          <span class="eye-ear" id="earRight">—</span>
+        </div>
+        <div class="overlay" id="overlay"></div>
+      </div>
+
+      <div class="readout">
+        <div class="stat"><div class="label">TIME</div><div class="value" id="timeVal">0.00</div></div>
+        <div class="stat"><div class="label">BEST</div><div class="value" id="bestVal">—</div></div>
+        <div class="stat"><div class="label">BLINKS</div><div class="value" id="blinkVal">0</div></div>
+        <div class="stat" id="ghostStat" hidden><div class="label" id="ghostLabel">GHOST</div><div class="value" id="ghostVal">—</div></div>
+      </div>
+
+      <div class="proof" id="proof" hidden>
+        <div class="proof-head">
+          <span>PROOF — THE LAST MOMENT BEFORE THE BLINK</span>
+          <span id="proofReason"></span>
+        </div>
+        <canvas id="replayCv"></canvas>
+        <div class="proof-ctl">
+          <button type="button" class="mini" id="proofPlay" aria-label="Play or pause the replay">❚❚</button>
+          <input type="range" id="proofScrub" min="0" max="0" value="0" step="1" aria-label="Scrub the replay">
+          <span class="proof-read" id="proofRead">—</span>
+        </div>
+      </div>
+
+      <canvas id="trace" class="trace" title="Eye openness over the last 4 seconds"></canvas>
+      <p class="status" id="status"></p>
+    </section>
+
+    <div class="controls">
+      <button type="button" id="startButton" hidden>START</button>
+      <button type="button" id="againButton" hidden>GO AGAIN</button>
+    </div>
+
+    <!-- Submission is a deliberate click, never automatic: a handle only leaves
+         the browser when the player decides to put it on the board. -->
+    <section class="submit" id="submit" hidden>
+      <label for="handle">POST THIS RUN AS</label>
+      <div class="submit-row">
+        <input type="text" id="handle" maxlength="24" placeholder="anonymous"
+               autocomplete="off" autocapitalize="off" spellcheck="false">
+        <button type="button" class="mini" id="submitButton">POST SCORE</button>
+      </div>
+      <p class="submit-note" id="submitNote">Handle and time only. Nothing else is stored.</p>
+    </section>
+
+    <section class="board">
+      <div class="board-head">
+        <h2>Top Blinkers</h2>
+        <div class="board-tabs" role="group" aria-label="Leaderboard period">
+          <button type="button" class="mini is-on" data-period="all">ALL TIME</button>
+          <button type="button" class="mini" data-period="day">TODAY</button>
+        </div>
+      </div>
+      <ol class="board-list" id="boardList">
+        <li class="board-empty">Loading the board…</li>
+      </ol>
+      <p class="board-note">Best run per handle. Scores are recorded in the browser you play in — treat the board as a scoreboard among friends, not a sworn affidavit.</p>
+    </section>
+
+    <section class="how">
+      <h2>How it works</h2>
+      <p>FaceMesh runs entirely in this tab. It measures your eye aspect ratio — the height of the opening over its width — calibrates to your own resting value, and stops the clock on the first fast drop. <strong>No video ever leaves your device.</strong> What gets posted, if you choose to post, is a handle, a duration, and the openness curve of that one round so somebody else can race it.</p>
+      <p>Needs a webcam and a browser with WebGL. Works best with your face lit from the front.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/play/">Arcade</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a></p>
+  </footer>
+
+  <script src="../../shader-bg.js"></script>
+  <script src="blinkers.js"></script>
+</body>
+</html>

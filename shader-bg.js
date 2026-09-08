@@ -1,0 +1,121 @@
+// Iridescent WebGL backdrop shared by every page that shows <canvas id="shader-bg">.
+// Extracted from index.html so the arcade pages get the same backdrop without
+// a second copy of the shader drifting out of sync with this one.
+(function() {
+  var canvas = document.getElementById('shader-bg');
+  var isHDR = false;
+  var gl = canvas.getContext('webgl2');
+  if (gl && gl.drawingBufferColorSpace) {
+    try {
+      gl.drawingBufferColorSpace = 'display-p3';
+      isHDR = gl.drawingBufferColorSpace === 'display-p3';
+    } catch(e) { isHDR = false; }
+  }
+  if (!gl) gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  var isGL2 = gl instanceof WebGL2RenderingContext;
+  var prefix = isGL2 ? '#version 300 es\n' : '';
+  var outDecl = isGL2 ? 'out vec4 fragColor;\n' : '';
+  var fragOut = isGL2 ? 'fragColor' : 'gl_FragColor';
+  var attrKey = isGL2 ? 'in' : 'attribute';
+
+  var vsSource = prefix + attrKey + ' vec2 a_pos;void main(){gl_Position=vec4(a_pos,0.0,1.0);}';
+  var fsSource = prefix + [
+    'precision mediump float;',
+    outDecl + 'uniform float u_time;',
+    'uniform vec2 u_resolution;',
+    'uniform float u_hdr;',
+    'void main(){',
+    '  vec2 uv=(gl_FragCoord.xy/u_resolution.xy)*2.0-1.0;',
+    '  uv.x*=u_resolution.x/u_resolution.y;',
+    '  float t=u_time*0.3;',
+    '  float v=0.0;',
+    '  v+=sin(uv.x*2.5+t);',
+    '  v+=sin((uv.y*2.5+t)*0.7);',
+    '  v+=sin((uv.x*1.8+uv.y*2.5+t)*0.5);',
+    '  v+=sin(length(uv*3.5-vec2(sin(t*0.3),cos(t*0.2)))*1.3);',
+    '  v+=sin(length(uv*2.8+vec2(cos(t*0.4),sin(t*0.3)))*1.1);',
+    '  v*=0.4;',
+    '  float phase=v*3.14159;',
+    '  vec3 base=vec3(0.06,0.03,0.02);',
+    '  float boost=1.0+u_hdr*0.4;',
+    '  vec3 iri=vec3(',
+    '    sin(phase)*0.12*boost+0.08*boost,',
+    '    sin(phase+1.5)*0.05+0.02,',
+    '    sin(phase+3.0)*0.03+0.01',
+    '  );',
+    '  vec3 col=base+iri;',
+    '  ' + fragOut + '=vec4(col,1.0);',
+    '}'
+  ].join('\n');
+
+  function compile(type, source) {
+    var s = gl.createShader(type);
+    gl.shaderSource(s, source);
+    gl.compileShader(s);
+    if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) { gl.deleteShader(s); return null; }
+    return s;
+  }
+
+  var vs = compile(gl.VERTEX_SHADER, vsSource);
+  var fs = compile(gl.FRAGMENT_SHADER, fsSource);
+  if (!vs || !fs) return;
+
+  var prog = gl.createProgram();
+  gl.attachShader(prog, vs);
+  gl.attachShader(prog, fs);
+  gl.linkProgram(prog);
+  if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) return;
+  gl.useProgram(prog);
+
+  var buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+
+  var aPos = gl.getAttribLocation(prog, 'a_pos');
+  gl.enableVertexAttribArray(aPos);
+  gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+
+  var uTime = gl.getUniformLocation(prog, 'u_time');
+  var uRes = gl.getUniformLocation(prog, 'u_resolution');
+  var uHdr = gl.getUniformLocation(prog, 'u_hdr');
+
+  var rafId;
+  var mql = window.matchMedia('(prefers-reduced-motion: reduce)');
+  var prefersReduced = mql.matches;
+
+  function frame(ts) {
+    gl.uniform1f(uTime, prefersReduced ? 0.0 : ts * 0.001);
+    gl.uniform2f(uRes, canvas.width, canvas.height);
+    gl.uniform1f(uHdr, isHDR ? 1.0 : 0.0);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    if (!prefersReduced) rafId = requestAnimationFrame(frame);
+  }
+  rafId = requestAnimationFrame(frame);
+
+  mql.addEventListener('change', function(e) {
+    prefersReduced = e.matches;
+    if (prefersReduced) {
+      cancelAnimationFrame(rafId);
+    } else {
+      rafId = requestAnimationFrame(frame);
+    }
+  });
+
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+      cancelAnimationFrame(rafId);
+    } else if (!prefersReduced) {
+      rafId = requestAnimationFrame(frame);
+    }
+  });
+})();
