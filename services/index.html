@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services — Dorky Robot</title>
+  <meta name="description" content="Site Care and Research Briefs from Dorky Robot. Clear packages, fixed prices — email to start.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .services {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+    .services h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .services .lede {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      margin-bottom: 2.5rem;
+    }
+    .services .eyebrow {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+    .services h2 {
+      font-size: 1.35rem;
+      font-weight: 650;
+      margin-bottom: 0.75rem;
+    }
+    .services section.offer {
+      margin-bottom: 2.75rem;
+      padding: 1.5rem;
+      background: rgba(var(--surface-rgb), 0.72);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .services p, .services li {
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .services ul {
+      padding-left: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .services a { color: var(--accent); }
+    .services table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0 1.25rem;
+      font-size: 0.95rem;
+    }
+    .services th, .services td {
+      border: 1px solid var(--border);
+      padding: 0.65rem 0.75rem;
+      text-align: left;
+      vertical-align: top;
+    }
+    .services th {
+      color: var(--text-muted);
+      font-weight: 600;
+      background: rgba(0,0,0,0.2);
+    }
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .cta {
+      display: inline-block;
+      padding: 0.55rem 0.95rem;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #0d1117 !important;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+    }
+    .cta:hover { background: var(--accent-hover); }
+    .cta.secondary {
+      background: transparent;
+      color: var(--accent) !important;
+      border: 1px solid var(--border);
+    }
+    .note {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .legal-nav {
+      padding: 1.5rem 2rem 0;
+      max-width: 760px;
+      margin: 0 auto;
+      font-size: 0.9rem;
+    }
+    .legal-nav a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .legal-nav a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <canvas id="shader-bg" class="shader-bg" aria-hidden="true"></canvas>
+  <nav class="legal-nav"><a href="/">← Dorky Robot</a></nav>
+  <main class="services">
+    <h1>Services</h1>
+    <p class="lede">Practical packages for teams who want help without a vague agency retainer. Built and delivered by Dorky Robot — with Felix on contracts and client messages.</p>
+
+    <section class="offer" id="site-care">
+      <p class="eyebrow">Retainer</p>
+      <h2>Site Care</h2>
+      <p>Keep a small-business or realtor site healthy without hiring a full agency. We watch uptime, SSL, and domain risk, send a clear weekly note, and ship a small number of content fixes each month.</p>
+      <table>
+        <thead>
+          <tr><th></th><th>Starter</th><th>Growth</th></tr>
+        </thead>
+        <tbody>
+          <tr><th>Price</th><td><strong>$149/mo</strong></td><td><strong>$249/mo</strong></td></tr>
+          <tr><th>Uptime / SSL / domain watch</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th>Status notes</th><td>Weekly</td><td>Daily checks + weekly deeper pass</td></tr>
+          <tr><th>Small edits</th><td>2 / mo</td><td>6 / mo</td></tr>
+          <tr><th>Monthly PDF report</th><td>Yes</td><td>Yes</td></tr>
+          <tr><th>Async review notes</th><td>—</td><td>1× / mo</td></tr>
+        </tbody>
+      </table>
+      <p class="note"><strong>Not included:</strong> redesigns, new features, IDX/MLS setup, custom apps (quoted separately).</p>
+      <div class="cta-row">
+        <a class="cta" href="mailto:felix@dorkyrobot.com?subject=Site%20Care%20Starter%20%24149%2Fmo">Email to start — Starter ($149/mo)</a>
+        <a class="cta secondary" href="mailto:felix@dorkyrobot.com?subject=Site%20Care%20Growth%20%24249%2Fmo">Growth ($249/mo)</a>
+      </div>
+      <p class="note" style="margin-top:0.85rem">Or write <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a> and say which plan you want. Prefer card checkout later? Ask for a checkout link.</p>
+      <!-- Stripe placeholders (not live): {{STRIPE_SITE_CARE_STARTER}} {{STRIPE_SITE_CARE_GROWTH}} -->
+    </section>
+
+    <section class="offer" id="research-brief">
+      <p class="eyebrow">Fixed deliverable</p>
+      <h2>Research Brief</h2>
+      <p>Bounded competitive or ICP research with sources — scoped up front, delivered on a deadline, one revision included.</p>
+      <ul>
+        <li><strong>Standard — $500</strong> — summary + 15–25 named targets/comps · 5 business days · one revision</li>
+        <li><strong>Deep — $1,200</strong> — Standard plus pricing table (when public) and next-action recommendations</li>
+      </ul>
+      <div class="cta-row">
+        <a class="cta" href="mailto:felix@dorkyrobot.com?subject=Research%20Brief%20Standard%20%24500">Email to start — Standard ($500)</a>
+        <a class="cta secondary" href="mailto:felix@dorkyrobot.com?subject=Research%20Brief%20Deep%20%241200">Deep ($1,200)</a>
+      </div>
+      <p class="note" style="margin-top:0.85rem">Or email <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a> with Standard or Deep in the subject. Ask for a checkout link if you prefer card payment.</p>
+      <!-- Stripe placeholders (not live): {{STRIPE_RESEARCH_STANDARD}} {{STRIPE_RESEARCH_DEEP}} -->
+    </section>
+
+    <section class="offer" id="how-to-buy">
+      <h2>How to buy</h2>
+      <p>Email <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a> to start. We’ll confirm scope and send a checkout link when card payment is needed. Felix Flores / Dorky Robot LLC approves contracts, invoices, and outbound client messages.</p>
+      <p class="note">Prefer community / OSS chat? <a href="/discord/">Join us on Discord</a> — that’s separate from paid packages.</p>
+    </section>
+  </main>
+  <footer>
+    <p><a href="/discord/">Discord</a> · <a href="/services/">Services</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a></p>
+  </footer>
+</body>
+</html>
