@@ -374,3 +374,38 @@ footer a:hover {
   opacity: 1;
   transform: translateX(-50%) scale(1);
 }
+
+/* Arcade teaser — one wide card rather than a grid, so it reads as a pointer
+   to another surface instead of competing with The Stack above it. */
+.arcade-card {
+  display: block;
+  max-width: 640px;
+}
+
+.section-footnote {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+}
+
+.section-footnote a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.section-footnote a:hover {
+  text-decoration: underline;
+}
+
+/* Non-navigating cards: same surface, but nothing to click, so they must not
+   pick up the hover affordance a link card has. */
+.card-placeholder {
+  cursor: default;
+}
+
+.card-placeholder:hover {
+  background: rgba(var(--surface-rgb), 0.65);
+}
+
+.card-placeholder a {
+  color: var(--accent);
+}

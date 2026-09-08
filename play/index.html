@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arcade · Dorky Robot</title>
+  <meta name="description" content="Small browser games from Dorky Robot. Nothing installs, nothing uploads.">
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <canvas id="shader-bg" class="shader-bg" aria-hidden="true"></canvas>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <h1>Arcade <span class="blink">_</span></h1>
+      <p class="tagline">Small things we built because they were funny. They run entirely in your browser.</p>
+      <p class="discord-link"><a href="/">← Dorky Robot</a></p>
+    </div>
+  </header>
+
+  <main>
+    <section class="projects">
+      <h2>Now Playing</h2>
+      <div class="grid">
+
+        <a href="/play/blinkers/" class="card">
+          <div class="card-header">
+            <h3>Blinking Contest <span class="maturity served" data-tooltip="Works and ready to use today">Served</span></h3>
+            <span class="lang js">JS</span>
+          </div>
+          <p>Stare down your webcam. Face tracking watches your eyelids, and the moment you blink the clock stops. Post your time to the Top Blinkers board, or race somebody else's round.</p>
+        </a>
+
+        <div class="card card-placeholder">
+          <div class="card-header">
+            <h3>More coming</h3>
+          </div>
+          <p>The cabinet has room. If you have an idea, bring it to <a href="https://dorkyrobot.com/discord">Discord</a>.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="projects">
+      <h2>House Rules</h2>
+      <div class="grid">
+
+        <div class="card card-placeholder">
+          <div class="card-header"><h3>Nothing uploads</h3></div>
+          <p>Games that use your camera do the work in the tab. No frame of video leaves your device.</p>
+        </div>
+
+        <div class="card card-placeholder">
+          <div class="card-header"><h3>Minimal record</h3></div>
+          <p>A leaderboard entry is a handle you chose, a score, and a timestamp. No accounts, no email, no tracking identifiers.</p>
+        </div>
+
+        <div class="card card-placeholder">
+          <div class="card-header"><h3>Honour system</h3></div>
+          <p>Scores are measured in your own browser, so anyone determined enough can fake one. Play it straight.</p>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><a href="/">Dorky Robot</a> · <a href="https://dorkyrobot.com/discord">Discord</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="mailto:felix@dorkyrobot.com">felix@dorkyrobot.com</a></p>
+  </footer>
+
+  <script src="../shader-bg.js"></script>
+</body>
+</html>
