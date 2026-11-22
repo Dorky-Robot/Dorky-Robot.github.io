@@ -1,7 +1,7 @@
 #!/bin/sh
 # Serve this folder on loopback, run the page proof against it, and stop the
 # server whether the proof passed, failed, timed out or was interrupted.
-#   sh scripts/prove.sh /tulay/ [shots folder]
+#   sh scripts/prove.sh /play/ [shots folder]
 set -u
 cd "$(dirname "$0")/.." || exit 1
 port=${PORT:-8791}
